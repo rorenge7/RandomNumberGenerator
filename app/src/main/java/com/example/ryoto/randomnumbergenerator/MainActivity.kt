@@ -2,8 +2,10 @@ package com.example.ryoto.randomnumbergenerator
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
@@ -11,6 +13,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import android.R.id.edit
+
+
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBarChangeListener {
@@ -24,6 +29,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
     private var minValue = 0
     private var maxValue = 1
     var format: DateFormat = SimpleDateFormat("yyyy MM dd hh:mm:ss.SSS")
+    var sharedPref: SharedPreferences? = null
 
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +44,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
         maxTextView = findViewById(R.id.textView_maxNum)
         randNumText = findViewById<View>(R.id.textView_randNum) as TextView?
 
+        sharedPref= PreferenceManager.getDefaultSharedPreferences(this)
+        minValue = sharedPref!!.getInt("min_value",0)
+        maxValue = sharedPref!!.getInt("max_value",1)
         textView_minNum.setText(minValue.toString())
         textView_maxNum.setText(maxValue.toString())
         minSeekBar?.setProgress( minValue )
         maxSeekBar?.setProgress( maxValue )
+
     }
 
     override fun onClick(view: View) {
@@ -66,6 +76,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
                         textView_randNum.setText((rand.nextInt(maxValue - minValue +1) + minValue).toString())
                     }
                     textView_time.setText(format.format(Date()))
+                    writePreference()
                 }
             }
         }
@@ -95,6 +106,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
 
     override fun onStopTrackingTouch(seekBar: SeekBar) {
         // called when tracking the seekbar is stopped
+    }
+    private fun writePreference(){
+        val prefEditor = sharedPref?.edit()
+        prefEditor?.putInt("min_value",minValue)
+        prefEditor?.putInt("max_value",maxValue)
+        prefEditor?.commit()
     }
 }
 
