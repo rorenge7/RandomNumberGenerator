@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar
-        android:id="@+id/seekBar_min"
+        android:id="@+id/seekBar_alpha"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="13dp"
@@ -31,10 +31,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_minNum" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_alphaNum" />
 
     <SeekBar
-        android:id="@+id/seekBar_max"
+        android:id="@+id/seekBar_beta"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,28 +48,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_maxNum" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_betaNum" />
 
     <TextView
-        android:id="@+id/text_max"
+        android:id="@+id/text_beta"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginBottom="32dp"
         android:layout_marginStart="32dp"
         android:text="max"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar_max"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar_beta"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/text_min"
+        android:id="@+id/text_alpha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginStart="32dp"
         android:text="min"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar_min"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar_alpha"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -95,7 +95,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView_maxNum"
+        android:id="@+id/textView_betaNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -103,18 +103,30 @@
         android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar_min" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_alpha" />
 
     <TextView
-        android:id="@+id/textView_minNum"
+        android:id="@+id/textView_alphaNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="64dp"
         android:text="TextView"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar_min"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar_alpha"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_distribution" />
+
+    <Spinner
+        android:id="@+id/spinner_distribution"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:entries="@array/list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

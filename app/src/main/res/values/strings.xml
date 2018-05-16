@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RandomNumberGenerator</string>
+
+    <string-array name="list">
+        <item>一様分布</item>
+        <item>正規分布</item>
+        <item>指数分布</item>
+    </string-array>
 </resources>
