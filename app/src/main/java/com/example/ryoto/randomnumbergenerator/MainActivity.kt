@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
 
     private var alphaTextView: TextView? = null
     private var betaTextView: TextView? = null
-    private var minNumTextView: TextView? = null
-    private var maxNumTextView: TextView? = null
+    private var alphaNumTextView: TextView? = null
+    private var betaNumTextView: TextView? = null
     private var alphaSeekBar: SeekBar? = null
     private var betaSeekBar: SeekBar? = null
     private var randNumText: TextView? = null
@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
         alphaSeekBar?.setOnSeekBarChangeListener(this)
         betaSeekBar = findViewById<View>(R.id.seekBar_beta) as SeekBar?
         betaSeekBar?.setOnSeekBarChangeListener(this)
-        minNumTextView = findViewById(R.id.textView_alphaNum)
-        maxNumTextView = findViewById(R.id.textView_betaNum)
+        alphaNumTextView = findViewById(R.id.textView_alphaNum)
+        betaNumTextView = findViewById(R.id.textView_betaNum)
         randNumText = findViewById<View>(R.id.textView_randNum) as TextView?
         distributionSpinner = findViewById<View>(R.id.spinner_distribution) as Spinner?
         distributionSpinner!!.onItemSelectedListener = this
@@ -131,6 +131,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        setGroupVisibility(0,View.VISIBLE)
+        setGroupVisibility(1,View.VISIBLE)
         when(position){
             UNIFORM_DIST_NUM->{
                 alphaValue = sharedPref!!.getInt("min_value",0)
@@ -148,6 +150,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
                 alphaValue = sharedPref!!.getInt("lambda_value",1)
                 alphaTextView?.text = "lambda"
                 betaTextView?.text = "unnecessary"
+                setGroupVisibility(1, View.INVISIBLE)
             }
         }
         seekBar_alpha.progress = alphaValue
@@ -182,6 +185,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,SeekBar.OnSeekBar
     private fun exponentialDistribution(lambda: Double = 1.0): String{
 //        if(lambda == 0.0)return "ERROR"
         return (- Math.log(rand.nextDouble())/lambda).toString()
+    }
+
+    private  fun setGroupVisibility(group: Int, visibility: Int){
+        when(group){
+            0->{
+                alphaSeekBar?.visibility = visibility
+                alphaTextView?.visibility = visibility
+                alphaNumTextView?.visibility = visibility
+            }
+            1->{
+                betaSeekBar?.visibility = visibility
+                betaTextView?.visibility = visibility
+                betaNumTextView?.visibility = visibility
+            }
+        }
     }
 }
 
